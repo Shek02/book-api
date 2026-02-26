@@ -1,59 +1,128 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Aula Coding Task - Book & Author API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This project is a simplified RESTful API for managing a collection of books and authors, built using Laravel 12 and MariaDB. It allows creating, reading, updating, and deleting authors and books, with many-to-many relationships between them.
 
-## About Laravel
+📦 Requirements
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+PHP >= 8.5
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Composer
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+MariaDB / MySQL
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+⚙️ Setup Instructions
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Follow these steps to get the project up and running locally:
 
-## Laravel Sponsors
+Clone the repository
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+git clone <your-repo-url>
+cd aula_coding_task
 
-### Premium Partners
+Install dependencies
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+composer install
 
-## Contributing
+Copy the environment file
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+cp .env.example .env
 
-## Code of Conduct
+Configure the database connection in .env
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Set your MariaDB/MySQL credentials:
 
-## Security Vulnerabilities
+DB_CONNECTION=mariadb
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=aula_coding_task
+DB_USERNAME=root
+DB_PASSWORD=
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Generate the application key
 
-## License
+php artisan key:generate
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Run database migrations
+
+This will create all tables (authors, books, author_book, migrations):
+
+php artisan migrate
+
+(Optional) Seed the database with fake data
+
+php artisan db:seed
+🚀 Running the Application
+
+Start the local development server:
+
+php artisan serve
+
+By default, the API will be accessible at:
+
+http://127.0.0.1:8000
+🔗 API Endpoints
+
+All endpoints are prefixed with /api.
+
+Authors
+Method	Endpoint	Description
+GET	/api/authors	List all authors
+POST	/api/authors	Create a new author
+GET	/api/authors/{id}	Get a single author
+PUT	/api/authors/{id}	Update an author
+DELETE	/api/authors/{id}	Delete an author
+
+Example POST body:
+
+{
+    "first_name": "John",
+    "last_name": "Doe"
+}
+Books
+Method	Endpoint	Description
+GET	/api/books	List all books
+POST	/api/books	Create a new book
+GET	/api/books/{id}	Get a single book
+PUT	/api/books/{id}	Update a book
+DELETE	/api/books/{id}	Delete a book
+
+Example POST body:
+
+{
+    "title": "The Great Book",
+    "authors": [1, 2],
+    "published_year": 2021,
+    "genre": "Fiction"
+}
+⚡ Notes
+
+All API responses are in JSON format.
+
+Validation is applied to required fields (e.g., first_name, last_name, title, authors, published_year).
+
+Relationships between books and authors are handled via a many-to-many pivot table (author_book).
+
+📝 Git Workflow Suggestion
+
+Commit after each logical step:
+
+Migrations created
+
+Models created
+
+Controllers + CRUD implemented
+
+Routes added
+
+Factories + Seeders implemented
+
+README updated
+
+🔒 License
+
+This project is open-sourced software licensed under the MIT license
+.
+
+Se vuoi, posso anche prepararti una versione ancora più breve e “user-friendly” da usare per il recruiter, dove è tutto ridotto ai comandi principali e ai dettagli essenziali per testare le API in Postman.
