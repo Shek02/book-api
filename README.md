@@ -1,7 +1,7 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 Aula Coding Task - Book & Author API
 
-This project is a simplified RESTful API for managing a collection of books and authors, built using Laravel 12 and MariaDB. It allows creating, reading, updating, and deleting authors and books, with many-to-many relationships between them.
+Simplified RESTful API for managing books and authors, built with Laravel 12 and MariaDB. Supports CRUD operations and many-to-many relationships.
 
 📦 Requirements
 
@@ -11,27 +11,16 @@ Composer
 
 MariaDB / MySQL
 
-
 ⚙️ Setup Instructions
-
-Follow these steps to get the project up and running locally:
-
-Clone the repository
-
+1. Clone repository
 git clone <your-repo-url>
 cd aula_coding_task
-
-Install dependencies
-
+2. Install dependencies
 composer install
-
-Copy the environment file
-
+3. Configure environment
 cp .env.example .env
 
-Configure the database connection in .env
-
-Set your MariaDB/MySQL credentials:
+Set your MariaDB credentials in .env:
 
 DB_CONNECTION=mariadb
 DB_HOST=127.0.0.1
@@ -39,27 +28,29 @@ DB_PORT=3306
 DB_DATABASE=aula_coding_task
 DB_USERNAME=root
 DB_PASSWORD=
-
-Generate the application key
-
+4. Generate application key
 php artisan key:generate
+🛠️ Database Initialization
 
-Run database migrations
+You have two options:
 
-This will create all tables (authors, books, author_book, migrations):
-
+Option 1: Laravel migrations (recommended)
 php artisan migrate
+Option 2: SQL scripts via Composer
 
-(Optional) Seed the database with fake data
+Drop existing tables:
 
+composer db:drop
+
+Initialize tables:
+
+composer db:init
+Optionally, seed fake data:
 php artisan db:seed
 🚀 Running the Application
-
-Start the local development server:
-
 php artisan serve
 
-By default, the API will be accessible at:
+Default URL:
 
 http://127.0.0.1:8000
 🔗 API Endpoints
@@ -96,33 +87,29 @@ Example POST body:
     "published_year": 2021,
     "genre": "Fiction"
 }
-⚡ Notes
+✅ Running Tests
 
-All API responses are in JSON format.
+Tests are included for Authors and Books. To run all tests:
 
-Validation is applied to required fields (e.g., first_name, last_name, title, authors, published_year).
+php artisan test
+⚡ Useful Commands
+Command	Purpose
+composer db:drop	Drop all tables (via SQL script)
+composer db:init	Initialize tables (via SQL script)
+php artisan migrate	Run Laravel migrations
+php artisan db:seed	Seed database with fake data
+php artisan test	Run automated tests for API
+php artisan serve	Start local dev server
+📝 Notes
 
-Relationships between books and authors are handled via a many-to-many pivot table (author_book).
+All responses are JSON.
 
-📝 Git Workflow Suggestion
+Validation ensures required fields are filled (first_name, last_name, title, authors, published_year).
 
-Commit after each logical step:
+Books ↔ Authors handled via pivot table author_book.
 
-Migrations created
-
-Models created
-
-Controllers + CRUD implemented
-
-Routes added
-
-Factories + Seeders implemented
-
-README updated
+Tests cover creation, validation, and basic read operations.
 
 🔒 License
 
-This project is open-sourced software licensed under the MIT license
-.
-
-Se vuoi, posso anche prepararti una versione ancora più breve e “user-friendly” da usare per il recruiter, dove è tutto ridotto ai comandi principali e ai dettagli essenziali per testare le API in Postman.
+Open-source MIT license.
